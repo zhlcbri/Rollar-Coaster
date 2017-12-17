@@ -74,50 +74,6 @@ void Curve::calculate_curve() {
     }
 }
 
-vector<glm::vec3> Curve::calculate_curve_physics(float v) {
-    vector<glm::vec3> result;
-    
-    int k = 0;
-    float t = 0.0f;
-    while (t + v < 1.0f) {
-        t = k/150.0f + v;
-        glm::vec4 T = glm::vec4(pow(t, 3.0f), pow(t, 2.0f), t, 1.0f);
-        glm::vec4 q = G * B * T;
-//        points_physics.push_back(q/q.w); // the points sphere will move along
-        result.push_back(q/q.w);
-        k++;
-    }
-    
-    return result;
-}
-
-//void Curve::calculate_curve_physics(float currentHeight, float maxHeight) {
-//    float v = 0.0f;
-//    float a = 0.00005f; // try different values
-//    float deltaH = currentHeight - maxHeight;
-//    float c = 0.0005f; // try different values
-//
-//    v = sqrt(-2 * a * deltaH) + c;
-//
-//    int k = 0;
-//    float t = 0.0f;
-//    while (t + v <= 1.0f) {
-//        t = k/150.0f + v;
-//        glm::vec4 T = glm::vec4(pow(t, 3.0f), pow(t, 2.0f), t, 1.0f);
-//        glm::vec4 q = G * B * T;
-//        points_physics.push_back(q/q.w); // the points sphere will move along
-//    }
-//}
-
-//void Curve::velocityAt(float currentHeight, float maxHeight) {
-//    float v = 0.0f;
-//    float a = 0.00005f; // try different values
-//    float deltaH = currentHeight - maxHeight;
-//    float c = 0.0005f; // try different values
-//
-//    v = sqrt(-2 * a * deltaH) + c;
-//}
-
 void Curve::draw(GLuint shaderProgram) {
     // Calculate the combination of the model and view (camera inverse) matrices
     glm::mat4 modelview = Window::V * toWorld;

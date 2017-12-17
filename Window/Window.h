@@ -29,11 +29,26 @@ using namespace std;
 class Window
 {
 public:
+    static Curve* curve0;
+    static Curve* curve1;
+    static Curve* curve2;
+    static Curve* curve3;
+    static Curve* curve4;
+    static Curve* curve5;
+    static Curve* curve6;
+    static Curve* curve7;
+    static Curve* curve8;
+    static Curve* curve9;
+    
 	static int width;
 	static int height;
     
+    static int index; // index of point selected
     static double xpos;
     static double ypos;
+    static double click_xpos;
+    static double click_ypos; // cursor position upon mouse click
+    
     static double OLD_XPOS;
     static double OLD_YPOS;
     static double scrollY;
@@ -51,12 +66,22 @@ public:
     static bool TO_HIGHEST_POINT;
     static bool RIDERS_VIEW;
     
-    static bool TEST_DRAG;
+    static bool MOVE_UP;
+    static bool MOVE_DOWN;
+    static bool MOVE_LEFT;
+    static bool MOVE_RIGHT;
+    
+    static glm::vec3 p0, p1, p2, p3, p4, p5, p6, p7, p8,
+    p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19,
+    p20, p21, p22, p23, p24, p25, p26, p27, p28, p29;
+    
+    static glm::vec3 selected; // point selected by mouse click
     
     static GLuint pointVAO, pointVBO; //
 //    static GLuint uProjection, uModelview;
     static vector<Curve*> curves;
-    static vector<glm::vec3> anchors; //
+    static vector<Curve*> originalCurves; // reset curve 
+    static vector<glm::vec3> anchors;
     static vector<glm::vec3> controls;
     static vector<glm::vec3> selectable_points;
     
@@ -66,12 +91,23 @@ public:
     static int countP; // point counter
     static glm::vec3 highestPoint;
     
+    static void define_curves();
+    static void populate_curves();
+    static void populate_anchors();
+    static void populate_controls();
+    static void populate_selectables(); // anchor + control
+    static void recalculate_curves();
+    static void recalculate_points();
+    static void recalculate_continuity();
+    
     static void update();
     static float velocityAt(float currentHeight);
     static void drawLines(GLuint shaderProgram);
     static void selectionDraw(GLuint shaderProgram);
-    static void processSelection(int xx, int yy);
+//    static void processSelection(int xx, int yy);
+    static unsigned int processSelection(int xx, int yy);
     static void renderSelection();
+//    static glm::vec4 cursorPos_world(double xpos, double ypos); // convert cursor position to world coordinates
     
 	static void initialize_objects();
 	static void clean_up();

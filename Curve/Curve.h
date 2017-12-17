@@ -46,12 +46,12 @@ public:
     vector<glm::vec3> control_points; // 4 control points that determine a curve, namely p
     vector<glm::vec3> points_on_curve; // q computed from Bernstein polynomial and p
     
-    vector<glm::vec3> points_physics; // points sphere should move along concerning velocity
+//    vector<glm::vec3> points_physics; // points sphere should move along concerning velocity
     
     void calculate_curve();
-    void velocityAt(float currentHeight, float maxHeight);
+//    void velocityAt(float currentHeight, float maxHeight);
 //    void calculate_curve_physics(float currentHeight, float maxHeight); //
-    vector<glm::vec3> calculate_curve_physics(float v); //
+//    vector<glm::vec3> calculate_curve_physics(float v); //
     
     void draw(GLuint shaderProgram);
     void drawLines(GLuint shaderProgram);
